@@ -8,6 +8,21 @@ public class OVecR2 {
 
 
     // accesoras y mutadoras
+    public double getX() {
+        return x;
+    }
+
+    public double getZ() {
+        return y;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
 
     // metodos
     public OVecR2 suma(OVecR2 b){

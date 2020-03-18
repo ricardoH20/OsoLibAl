@@ -7,9 +7,32 @@ public class OVecR3 {
     private double z;
     private double v;
 
-
-
     // accesoras y mutadoras
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setZ(double z) {
+        this.z = z;
+    }
+
+    public void setV(double v) {
+        this.v = v;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getV() {
+        return v;
+    }
+
     public OVecR3 suma(OVecR3 b){
         //TODO: implementar
         return new OVecR3();

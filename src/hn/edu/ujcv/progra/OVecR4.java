@@ -7,10 +7,39 @@ public class OVecR4 {
     private double v;
     private double w;
 
-
-
     // accesoras y mutadoras
 
+    public double getV() {
+        return v;
+    }
+
+    public double getW() {
+        return w;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public void setV(double v) {
+        this.v = v;
+    }
+
+    public void setW(double w) {
+        this.w = w;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setZ(double z) {
+        this.z = z;
+    }
     // metodos
 
     public OVecR4 suma(OVecR4 b){
