@@ -32,7 +32,7 @@ public class OVecR3 {
     public double getV() {
         return v;
     }
-    
+
     // metodos
     public OVecR3 suma(OVecR3 b)
     {
@@ -56,20 +56,20 @@ public class OVecR3 {
 
     public double prodPunto(OVecR3 b){
         double respuesta;
-        respuesta = (this.x * b.x) + (this.y * b.y) + (this.z * b.z);
+        respuesta = (this.x * b.x) + (this.v * b.v) + (this.z * b.z);
         return respuesta;
     }
 
     public double magnitud()
     {
         double respuesta;
-        respuesta = Math.sqrt( Math.pow(this.x,2) + Math.pow(this.y,2) + Math.pow(this.z,2));
+        respuesta = Math.sqrt( Math.pow(this.x,2) + Math.pow(this.v,2) + Math.pow(this.z,2));
         return respuesta;
     }
 
     @java.lang.Override
     public String toString(){
-        return "i: " + getX() + " j: " + getY() + " k: " + getZ();
+        return "i: " + getX() + " j: " + getV() + " k: " + getZ();
     }
 
 
