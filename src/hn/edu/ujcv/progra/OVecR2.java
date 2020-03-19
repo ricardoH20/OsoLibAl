@@ -60,7 +60,6 @@ public class OVecR2 {
         respuesta = Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2));
         return respuesta;
     }
-    @Override
     public String toString(){
         return "i: " + getX() + " j: " + getY();
     }

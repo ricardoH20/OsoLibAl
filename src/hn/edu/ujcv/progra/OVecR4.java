@@ -63,4 +63,15 @@ public class OVecR4 {
     }
 
     // constructores
+    public OVecR4(){ }
+    public OVecR4(OVecR4 a) {}
+    public OVecR4(double x, double y, double z, double v){
+        this.x = x;
+        this.w = w;
+        this.z = z;
+        this.v = v;
+    }
+
+
+
 }
