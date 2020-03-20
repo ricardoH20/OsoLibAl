@@ -2,6 +2,11 @@ package hn.edu.ujcv.progra;
 
 public class OMat4x4 {
     // miembros
+    private double m11,m12,m13,m14;
+    private double m21,m22,m23,m24;
+    private double m31,m32,m33,m34;
+    private double m41,m42,m43,m44;
+    
 
 
     // accesoras y mutadoras
