@@ -52,6 +52,7 @@ public class OMat2x2 {
         OMat2x2 c = new OMat2x2();
 
         return new OMat2x2( (1)/ ((m11 * m22)- (m21 * m12)) * m22, (1) / ((m11 * m22)- (m21 * m12)) * -m12,
+
                 (1) / ((m11 * m22)- (m21 * m12)) * -m21, (1) / ((m11 * m22)- (m21 * m12))*m11 );
     }
     public double suma(OMat2x2 b){
