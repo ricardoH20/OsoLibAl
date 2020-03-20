@@ -201,10 +201,83 @@ public class OMat4x4 {
         return p;
     }
 
-    public double determinante(){
-        //TODO: implementar
-        return 0.0f;
+    public double determinante()
+    {
+        double respuesta;
+        OMat3x3 cofA = new OMat3x3(this.m22,this.m23,this.m24,this.m32,this.m33,this.m34,this.m42,this.m43,this.m44);
+        OMat3x3 cofB = new OMat3x3(this.m21,this.m23,this.m24,this.m31,this.m33,this.m34,this.m41,this.m43,this.m44);
+        OMat3x3 cofC = new OMat3x3(this.m21,this.m22,this.m24,this.m31,this.m32,this.m34,this.m41,this.m42,this.m44);
+        OMat3x3 cofD = new OMat3x3(this.m21,this.m22,this.m23,this.m31,this.m32,this.m33,this.m41,this.m42,this.m43);
+        respuesta = (this.m11 * cofA.determinante()) - (this.m12 * cofB.determinante()) + (this.m13 * cofC.determinante()) - (this.m14 * cofD.determinante());
+        return respuesta;
     }
+    public OMat4x4 transpuesta()
+    {
+        return new OMat4x4(this.m11,this.m21,this.m31,this.m41,
+                this.m12,this.m22,this.m32,this.m42,
+                this.m13,this.m23,this.m33,this.m43,
+                this.m14,this.m24,this.m34,this.m44);
+    }
+
+    public OMat4x4 inversa(){
+        if (this.determinante() != 0)
+        {
+            double r11,r12,r13,r14;
+            double r21,r22,r23,r24;
+            double r31,r32,r33,r34;
+            double r41,r42,r43,r44;
+            double det;
+            det = this.determinante();
+            OMat3x3 adj11 = new OMat3x3(this.m22,this.m23,this.m24,this.m32,this.m33,this.m34,this.m42,this.m43,this.m44);
+            OMat3x3 adj12 = new OMat3x3(this.m21,this.m23,this.m24,this.m31,this.m33,this.m34,this.m41,this.m43,this.m44);
+            OMat3x3 adj13 = new OMat3x3(this.m21,this.m22,this.m24,this.m31,this.m32,this.m34,this.m41,this.m42,this.m44);
+            OMat3x3 adj14 = new OMat3x3(this.m21,this.m22,this.m23,this.m31,this.m32,this.m33,this.m41,this.m42,this.m43);
+            OMat3x3 adj21 = new OMat3x3(this.m12,this.m13,this.m14,this.m32,this.m33,this.m34,this.m42,this.m43,this.m44);
+            OMat3x3 adj22 = new OMat3x3(this.m11,this.m13,this.m14,this.m31,this.m33,this.m34,this.m41,this.m43,this.m44);
+            OMat3x3 adj23 = new OMat3x3(this.m11,this.m12,this.m14,this.m31,this.m32,this.m34,this.m41,this.m42,this.m44);
+            OMat3x3 adj24 = new OMat3x3(this.m11,this.m12,this.m13,this.m31,this.m32,this.m33,this.m42,this.m41,this.m43);
+            OMat3x3 adj31 = new OMat3x3(this.m12,this.m13,this.m14,this.m22,this.m23,this.m24,this.m42,this.m43,this.m44);
+            OMat3x3 adj32 = new OMat3x3(this.m11,this.m13,this.m14,this.m21,this.m23,this.m24,this.m41,this.m43,this.m44);
+            OMat3x3 adj33 = new OMat3x3(this.m11,this.m12,this.m14,this.m21,this.m22,this.m24,this.m41,this.m42,this.m44);
+            OMat3x3 adj34 = new OMat3x3(this.m11,this.m12,this.m13,this.m21,this.m22,this.m23,this.m41,this.m42,this.m43);
+            OMat3x3 adj41 = new OMat3x3(this.m12,this.m13,this.m14,this.m22,this.m23,this.m24,this.m32,this.m33,this.m34);
+            OMat3x3 adj42 = new OMat3x3(this.m11,this.m13,this.m14,this.m21,this.m23,this.m24,this.m31,this.m33,this.m34);
+            OMat3x3 adj43 = new OMat3x3(this.m11,this.m12,this.m14,this.m21,this.m22,this.m24,this.m31,this.m32,this.m34);
+            OMat3x3 adj44 = new OMat3x3(this.m11,this.m12,this.m13,this.m21,this.m22,this.m23,this.m31,this.m32,this.m33);
+            r11 = Math.pow(-1,2) * adj11.determinante();
+            r12 = Math.pow(-1,3) * adj12.determinante();
+            r13 = Math.pow(-1,4) * adj13.determinante();
+            r14 = Math.pow(-1,5) * adj14.determinante();
+            r21 = Math.pow(-1,3) * adj21.determinante();
+            r22 = Math.pow(-1,4) * adj22.determinante();
+            r23 = Math.pow(-1,5) * adj23.determinante();
+            r24 = Math.pow(-1,6) * adj24.determinante();
+            r31 = Math.pow(-1,4) * adj31.determinante();
+            r32 = Math.pow(-1,5) * adj32.determinante();
+            r33 = Math.pow(-1,6) * adj33.determinante();
+            r34 = Math.pow(-1,7) * adj34.determinante();
+            r41 = Math.pow(-1,5) * adj41.determinante();
+            r42 = Math.pow(-1,6) * adj42.determinante();
+            r43 = Math.pow(-1,7) * adj43.determinante();
+            r44 = Math.pow(-1,8) * adj44.determinante();
+
+            OMat4x4 a = new OMat4x4(r11,r12,r13,r14,r21,r22,r23,r24,r31,r32,r33,r34,r41,r42,r43,r44);
+            OMat4x4 trans = new OMat4x4();
+            trans = a.transpuesta();
+
+            return new OMat4x4(trans.m11/det,trans.m12/det,trans.m13/det,trans.m14/det,
+                    trans.m21/det,trans.m22/det,trans.m23/det,trans.m24/det,
+                    trans.m31/det,trans.m32/det,trans.m33/det,trans.m34/det,
+                    trans.m41/det,trans.m42/det,trans.m43/det,trans.m44/det);
+        }else
+        {
+            return new OMat4x4(0,0,0,0,
+                    0,0,0,0,
+                    0,0,0,0,
+                    0,0,0,0);
+        }
+    }
+
 
     // Metodos de la clase.
     @Override
@@ -215,9 +288,52 @@ public class OMat4x4 {
                 " m31: " + getM31() + " m32: " + getM32() + " m33: " + getM33() + " m34: " + getM34() +
                 " m41: " + getM41() + " m42: " + getM42() + " m43: " + getM43() + " m44: " + getM44();
     }
+    public static OMat4x4 rotX(double alpha)
+    {
+        double  r11,r12;
+        double  r21,r22;
+        r11 = Math.cos(alpha);
+        r12 = Math.sin(alpha);
+        r21 = -Math.sin(alpha);
+        r22 = Math.cos(alpha);
+        return new OMat4x4(r11,r12,0,0,r21,r22,0,0,0,0,1,0,0,0,0,1);
+    }
+    public static OMat4x4 rotY(double alpha)
+    {
+        double r11,r13;
+        double r31,r33;
+        r11 = Math.cos(alpha);
+        r13 = -Math.sin(alpha);
+        r31 = Math.sin(alpha);
+        r33 = Math.cos(alpha);
+
+        return new OMat4x4(r11,0,r13,0,0,1,0,0,r31,0,r33,0,0,0,0,1);
+    }
+
+    public static OMat4x4 rotZ(double alpha)
+    {
+        double r22,r23;
+        double r32,r33;
+        r22 = Math.cos(alpha);
+        r23 = Math.sin(alpha);
+        r32 = -Math.sin(alpha);
+        r33 = Math.cos(alpha);
+
+        return new OMat4x4(1,0,0,0,0,r22,r23,0,0,r32,r33,0,0,0,0,1);
+    }
+    public static OMat4x4 identidad()
+    {
+        return new OMat4x4(1,0,0,0,
+                0,1,0,0,
+                0,0,1,0,
+                0,0,0,1);
+    }
+
+
 
 
     // constructores
+    public OMat4x4(){}
     public OMat4x4(double m11, double m12, double m13, double m14, double m21, double m22, double m23,double m24, double m31, double m32, double m33 , double m34,
                    double m41, double m42, double m43, double m44) {
         this.m11 = m11;this.m12 = m12;

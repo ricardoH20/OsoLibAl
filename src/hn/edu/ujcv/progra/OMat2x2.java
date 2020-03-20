@@ -48,12 +48,11 @@ public class OMat2x2 {
         return g;
     }
 
-    public OMat2x2 inversa(OMat2x2 a){
-        OMat2x2 c = new OMat2x2();
-
-        return new OMat2x2( (1)/ ((m11 * m22)- (m21 * m12)) * m22, (1) / ((m11 * m22)- (m21 * m12)) * -m12,
-
-                (1) / ((m11 * m22)- (m21 * m12)) * -m21, (1) / ((m11 * m22)- (m21 * m12))*m11 );
+    public OMat2x2 inversa()
+    {
+        this.determinante();
+        return new OMat2x2((1/this.determinante()) * this.m22,(1/this.determinante()) * -this.m12,
+                (1/this.determinante()) * -this.m21,(1/this.determinante()) * this.m11);
     }
     public double suma(OMat2x2 b){
         double r11, r12;
@@ -114,6 +113,23 @@ public class OMat2x2 {
 
         return d;
     }
+    public static OMat2x2 rotacion(double alpha)
+    {
+        double  r11,r12,
+                r21,r22;
+        r11 = Math.cos(alpha);
+        r12 = -Math.sin(alpha);
+        r21 = Math.sin(alpha);
+        r22 = Math.cos(alpha);
+        return new OMat2x2(r11,r12,
+                r21,r22);
+    }
+
+    public static OMat2x2 identidad()
+
+    {
+        return new OMat2x2(1,0,0,1);
+    }
 
 
     // constructores
@@ -131,8 +147,20 @@ public class OMat2x2 {
         this.m21 = m21;
         this.m22 = m22;
     }
+    // metodos de clase
+    //public static OMat2x2 identidad()
 
-    public OMat2x2(OMat2x2 a){}
+    {
+        //return new OMat2x2(1,0,0,1);
+    }
+    //public static OMat2x2 rotacion(double alpha)
+    //public OMat2x2 inversa(){
+
+
 
 
 }
+
+
+
+
