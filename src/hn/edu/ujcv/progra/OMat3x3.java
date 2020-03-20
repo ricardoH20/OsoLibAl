@@ -83,70 +83,139 @@ public class OMat3x3 {
         this.m33 = m33;
     }
     // metodos
-
     public OMat3x3 transpuesta(){
-        //TODO: implementar
-        return new OMat3x3();
+        return new OMat3x3(this.m11,this.m21,this.m31,
+                this.m12,this.m22,this.m32,
+                this.m13,this.m23,this.m33);
     }
 
-    public OMat3x3 inversa(){
-        //TODO: implementar
-        return new OMat3x3();
+    public OMat3x3 inversa()
+    {
+        double r11, r12, r13;
+        double r21, r22, r23;
+        double r31, r32, r33;
+        double det;
+        OMat3x3 a = new OMat3x3();
+        a = this.transpuesta();
+        det = this.determinante();
+
+        OMat2x2 d11 = new OMat2x2(this.m22,this.m32,this.m23,this.m33);
+        OMat2x2 d12 = new OMat2x2(this.m12,this.m32,this.m13,this.m33);
+        OMat2x2 d13 = new OMat2x2(this.m12,this.m22,this.m13,this.m23);
+        OMat2x2 d21 = new OMat2x2(this.m21,this.m31,this.m23,this.m33);
+        OMat2x2 d22 = new OMat2x2(this.m11,this.m31,this.m13,this.m33);
+        OMat2x2 d23 = new OMat2x2(this.m11,this.m21,this.m13,this.m23);
+        OMat2x2 d31 = new OMat2x2(this.m21,this.m31,this.m22,this.m32);
+        OMat2x2 d32 = new OMat2x2(this.m11,this.m31,this.m12,this.m32);
+        OMat2x2 d33 = new OMat2x2(this.m11,this.m21,this.m12,this.m22);
+        r11  =  Math.pow(-1,2) * d11.determinante();
+        r12  =  Math.pow(-1,3) * d12.determinante();
+        r13  =  Math.pow(-1,4) * d13.determinante();
+        r21  =  Math.pow(-1,3) * d21.determinante();
+        r22  =  Math.pow(-1,4) * d22.determinante();
+        r23  =  Math.pow(-1,5) * d23.determinante();
+        r31  =  Math.pow(-1,4) * d31.determinante();
+        r32  =  Math.pow(-1,5) * d32.determinante();
+        r33  =  Math.pow(-1,6) * d33.determinante();
+        return new OMat3x3(r11/det,r12/det,r13/det,
+
+                r21/det,r22/det,r23/det,
+
+                r31/det,r32/det,r33/det);
     }
-    public OMat3x3 suma(OMat3x3 b){
-        //TODO: implementar
-        return new OMat3x3();
+    public OMat3x3 suma(OMat3x3 b)
+    {
+        double r11, r12, r13;
+        double r21, r22, r23;
+        double r31, r32, r33;
+        r11 = this.m11 + b.m11;
+        r12 = this.m12 + b.m12;
+        r13 = this.m13 + b.m13;
+        r21 = this.m21 + b.m21;
+        r22 = this.m22 + b.m22;
+        r23 = this.m23 + b.m23;
+        r31 = this.m31 + b.m31;
+        r32 = this.m32 + b.m32;
+        r33 = this.m33 + b.m33;
+        return new OMat3x3(r11, r12, r13,
+                r21, r22, r23,
+                r31, r32, r33);
     }
 
     public OMat3x3 resta(OMat3x3 b){
-        //TODO: implementar
-        return new OMat3x3();
+        double r11, r12, r13;
+        double r21, r22, r23;
+        double r31, r32, r33;
+        r11 = this.m11 - b.m11;
+        r12 = this.m12 - b.m12;
+        r13 = this.m13 - b.m13;
+        r21 = this.m21 - b.m21;
+        r22 = this.m22 - b.m22;
+        r23 = this.m23 - b.m23;
+        r31 = this.m31 - b.m31;
+        r32 = this.m32 - b.m32;
+        r33 = this.m33 - b.m33;
+        return new OMat3x3(r11, r12, r13,
+                r21, r22, r23,
+                r31, r32, r33);
     }
 
-    public OMat3x3 mult(OMat3x3 b){
-        //TODO: implementar
-        //    m11  m12
-        //    m21  m22
-        //
-        //
-        //  m11   =  a.m11 * b.m11 + a.m12 * b.m21
-        //  m12   =  a.m11 * b.m12 + a.m12 * b.m22
-        //
-        return new OMat3x3();
+    public OMat3x3 multiplicacion(OMat3x3 b)
+    {
+        double r11, r12, r13;
+        double r21, r22, r23;
+        double r31, r32, r33;
+        r11   =  (this.m11 * b.m11) + (this.m12 * b.m21) + (this.m13 * b.m31);
+        r12   =  (this.m11 * b.m12) + (this.m12 * b.m22) + (this.m13 * b.m32);
+        r13   =  (this.m11 * b.m13) + (this.m12 * b.m23) + (this.m13 * b.m33);
+        r21   =  (this.m21 * b.m11) + (this.m22 * b.m21) + (this.m23 * b.m31);
+        r22   =  (this.m21 * b.m12) + (this.m22 * b.m22) + (this.m23 * b.m32);
+        r23   =  (this.m21 * b.m13) + (this.m22 * b.m23) + (this.m23 * b.m33);
+        r31   =  (this.m31 * b.m11) + (this.m32 * b.m21) + (this.m33 * b.m31);
+        r32   =  (this.m31 * b.m12) + (this.m32 * b.m22) + (this.m33 * b.m32);
+        r33   =  (this.m31 * b.m13) + (this.m32 * b.m23) + (this.m33 * b.m33);
+        return new OMat3x3(r11, r12, r13,
+                r21, r22, r23,
+                r31, r32, r33);
     }
 
-    public double determinante(){
-        //TODO: implementar
-        return 0.0f;
+    public double determinante()
+    {
+        double respuesta;
+        respuesta = (this.m11*this.m22*this.m33) +
+                (this.m12*this.m23*this.m31) +
+                (this.m13*this.m21*this.m32) -
+                (this.m31*this.m22*this.m13) -
+                (this.m32*this.m23*this.m11) -
+                (this.m33*this.m21*this.m12);
+
+        return respuesta;
     }
 
-    // Metodos de la clase.
-    public static OMat3x3 rotX(double alpha){
 
 
-        return new OMat3x3();
-    }
-
-    public static OMat3x3 rotY(double alpha){
 
 
-        return new OMat3x3();
-    }
-
-    public static OMat3x3 rotZ(double alpha){
-
-
-        return new OMat3x3();
-    }
-
-    public static OMat3x3 identidad(){
-
-
-        //TODO: implementar
-        return new OMat3x3();
-    }
 
     // constructores
+    public OMat3x3(){}
+
+    public OMat3x3(double m11, double m12, double m13,
+                   double m21, double m22, double m23,
+                   double m31, double m32, double m33)
+    {
+        this.m11 = m11;
+        this.m12 = m12;
+        this.m13 = m13;
+        this.m21 = m21;
+        this.m22 = m22;
+        this.m23 = m23;
+        this.m31 = m31;
+        this.m32 = m32;
+        this.m33 = m33;
+    }
+
+    public  OMat3x3 (OMat3x3 a){}
 
 
 }

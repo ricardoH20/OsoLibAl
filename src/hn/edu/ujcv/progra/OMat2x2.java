@@ -42,85 +42,96 @@ public class OMat2x2 {
     }
     // metodos
 
-    public OMat2x2 transpuesta(){
-        //TODO: implementar
-        return new OMat2x2();
+    public double transpuesta()
+    {
+        double g =this.m22 + this.m21 + this.m12  +this.m11;
+        return g;
     }
 
-    public OMat2x2 inversa(){
-        //TODO: implementar
-        return new OMat2x2();
+    public OMat2x2 inversa(OMat2x2 a){
+        OMat2x2 c = new OMat2x2();
+
+        return new OMat2x2( (1)/ ((m11 * m22)- (m21 * m12)) * m22, (1) / ((m11 * m22)- (m21 * m12)) * -m12,
+                (1) / ((m11 * m22)- (m21 * m12)) * -m21, (1) / ((m11 * m22)- (m21 * m12))*m11 );
     }
-    public OMat2x2 suma(OMat2x2 b){
-        //TODO: implementar
-        return new OMat2x2();
+    public double suma(OMat2x2 b){
+        double r11, r12;
+        double r21, r22;
+
+        r11 = this.m11 + b.m11;
+        r12 = this.m12 + b.m12;
+        r21 = this.m21 + b.m21;
+        r22 = this.m22 + b.m22;
+
+        double g = r11 + r12 + r21 + r22;
+
+        return g;
     }
 
-    public OMat2x2 resta(OMat2x2 b){
-        //TODO: implementar
-        return new OMat2x2();
+    public double resta(OMat2x2 b){
+        double n11, n12;
+
+        double n21, n22;
+
+        n11 = this.m11 - b.m11;
+        n12 = this.m12 - b.m12;
+        n21 = this.m21 - b.m21;
+        n22 = this.m22 - b.m22;
+
+        double f = n11 + n12 + n21 + n22;
+
+        return f;
+
     }
 
-    public OMat2x2 mult(OMat2x2 b){
-        //TODO: implementar
-        //    m11  m12
-        //    m21  m22
+    public double mult(OMat2x2 b){
+        double n11, n12;
+
+        double n21, n22;
         //
+        n11 = (this.m11 *  b.m11 ) + (this.m12 * b.m21);
+        n12 = (this.m11 *  b.m12 ) + (this.m12 * b.m22);
+        n21 = (this.m21 *  b.m11 ) + (this.m22 * b.m21);
+        n22 = (this.m21 *  b.m12 ) + (this.m22 * b.m22);
+
+        double p = n11 + n12 + n21 + n22;
         //
-        //  m11   =  a.m11 * b.m11 + a.m12 * b.m21
-        //  m12   =  a.m11 * b.m12 + a.m12 * b.m22
-        //
-        return new OMat2x2();
+        return  p;
     }
 
     public double determinante(){
-        //TODO: implementar
-        return 0.0f;
-    }
+        double n11, n12;
 
-    // Metodos de la clase.
-    public static OMat2x2 rot(double alpha){
-        // cos a   -sin a
-        // sin a   cos a
+        double n21, n22;
 
-        double  m11,m12,
-                m21,m22;
+        n11 = this.m11;
+        n12 = this.m12;
+        n21 = this.m21;
+        n22 = this.m22;
 
-        m11 = Math.cos(alpha);
-        m12 = -Math.sin(alpha);
-        m21 = Math.sin(alpha);
-        m22 = Math.cos(alpha);
-        return new OMat2x2(m11,m12,m21,m22);
-    }
+        double d = (n11 * n22) - (n12 * n21);
 
-    public static OMat2x2 identidad(){
-
-
-        //TODO: implementar
-        return new OMat2x2();
-    }
-
-
-    // v * M => vector
-
-    public OVecR2 mult(OVecR2 a){
-        //             x                        y
-        //  ( a.x * m11 + a.y * m21 , a.x * m12 + a.y * m22)
-        //
-        return new OVecR2();
+        return d;
     }
 
 
     // constructores
+    public OMat2x2(OVecR2 a){}
+
+    public OMat2x2(OVecR2 a, OVecR2 b, boolean esColumna){}
+
     public OMat2x2(){}
 
-    public OMat2x2(OVecR2 a){}
+    public OMat2x2(double m11, double m12,
+                   double m21, double m22)
+    {
+        this.m11 = m11;
+        this.m12 = m12;
+        this.m21 = m21;
+        this.m22 = m22;
+    }
 
     public OMat2x2(OMat2x2 a){}
 
-    public OMat2x2(double m11, double m12,
-                   double m21, double m22){}
-
-    public OMat2x2(OVecR2 a, OVecR2 b, boolean esColumna){}
 
 }
