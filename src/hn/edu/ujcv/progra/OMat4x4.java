@@ -140,35 +140,65 @@ public class OMat4x4 {
     }
     // metodos
 
-    public OMat4x4 transpuesta(){
-        //TODO: implementar
-        return new OMat4x4();
+    public double suma(OMat4x4 b) {
+        double n11, n12, n13;
+        double n21, n22, n23;
+        double n31, n32, n33;
+
+        n11 = this.m11 + b.m11;
+        n12 = this.m12 + b.m12;
+        n13 = this.m13 + b.m13;
+        n21 = this.m21 + b.m21;
+        n22 = this.m22 + b.m22;
+        n23 = this.m23 + b.m23;
+        n31 = this.m31 + b.m31;
+        n32 = this.m32 + b.m32;
+        n33 = this.m33 + b.m33;
+
+        double h = n11 + n12 + n13 + n21 + n22 + n23 + n31 + n32 + n33;
+
+        return h;
     }
 
-    public OMat4x4 inversa(){
-        //TODO: implementar
-        return new OMat4x4();
-    }
-    public OMat4x4 suma(OMat4x4 b){
-        //TODO: implementar
-        return new OMat4x4();
+    public double resta(OMat4x4 b) {
+        double n11, n12, n13;
+        double n21, n22, n23;
+        double n31, n32, n33;
+
+        n11 = this.m11 - b.m11;
+        n12 = this.m12 - b.m12;
+        n13 = this.m13 - b.m13;
+        n21 = this.m21 - b.m21;
+        n22 = this.m22 - b.m22;
+        n23 = this.m23 - b.m23;
+        n31 = this.m31 - b.m31;
+        n32 = this.m32 - b.m32;
+        n33 = this.m33 - b.m33;
+
+        double g = n11 - n12 - n13 - n21 - n22 - n23 - n31 - n32 - n33;
+
+        return g;
     }
 
-    public OMat4x4 resta(OMat4x4 b){
-        //TODO: implementar
-        return new OMat4x4();
-    }
+    public double multiplicacion(OMat4x4 b) {
+        double n11, n12, n13;
+        double n21, n22, n23;
+        double n31, n32, n33;
 
-    public OMat4x4 mult(OMat4x4 b){
-        //TODO: implementar
-        //    m11  m12
-        //    m21  m22
+        n11 = (this.m11 * b.m11) + (this.m12 * b.m21);
+        n12 = (this.m11 * b.m12) + (this.m12 * b.m22);
+        n13 = (this.m11 * b.m13) + (this.m13 * b.m23);
+        n21 = (this.m21 * b.m11) + (this.m22 * b.m21);
+        n22 = (this.m21 * b.m12) + (this.m22 * b.m22);
+        n23 = (this.m21 * b.m23) + (this.m23 * b.m23);
+        n31 = (this.m31 * b.m31) + (this.m13 * b.m31);
+        n32 = (this.m31 * b.m32) + (this.m32 * b.m32);
+        n33 = (this.m31 * b.m33) + (this.m33 * b.m32);
+
+
+        double p = n11 + n12 + n13 + n21 + n22 + n23 + n31 + n32 + n33;
         //
-        //
-        //  m11   =  a.m11 * b.m11 + a.m12 * b.m21
-        //  m12   =  a.m11 * b.m12 + a.m12 * b.m22
-        //
-        return new OMat4x4();
+        return p;
     }
 
     public double determinante(){
@@ -177,35 +207,31 @@ public class OMat4x4 {
     }
 
     // Metodos de la clase.
-    public static OMat4x4 rotX(double alpha){
-
-
-        return new OMat4x4();
+    @Override
+    public String toString()
+    {
+        return " m11: " + getM11() + " m12: " + getM12() + " m13: " + getM13() + " m14: " + getM14() +
+                " m21: " + getM21() + " m22: " + getM22() + " m23: " + getM23() + " m24: " + getM24() +
+                " m31: " + getM31() + " m32: " + getM32() + " m33: " + getM33() + " m34: " + getM34() +
+                " m41: " + getM41() + " m42: " + getM42() + " m43: " + getM43() + " m44: " + getM44();
     }
 
-    public static OMat4x4 rotY(double alpha){
-
-
-        return new OMat4x4();
-    }
-
-    public static OMat4x4 rotZ(double alpha){
-
-
-        return new OMat4x4();
-    }
-
-    public static OMat4x4 rotW(double alpha){
-
-        return new OMat4x4();
-    }
-
-    public static OMat4x4 identidad(){
-
-
-        //TODO: implementar
-        return new OMat4x4();
-    }
 
     // constructores
-}
+    public OMat4x4(double m11, double m12, double m13, double m14, double m21, double m22, double m23,double m24, double m31, double m32, double m33 , double m34,
+                   double m41, double m42, double m43, double m44) {
+        this.m11 = m11;this.m12 = m12;
+        this.m13 = m13;this.m14 = m14;
+        this.m21 = m21;this.m22 = m22;
+        this.m23 = m23;this.m24 = m24;
+        this.m31 = m31;this.m32 = m32;
+        this.m33 = m33;this.m34 = m34;
+        this.m41 = m41;this.m42 = m42;
+        this.m43 = m43;this.m44 = m44;
+
+        double L = m11 + m12 + m13 + m14+ m21 + m22 + m23 + m24 + m31 + m32 + m33 + m34 + m41 + m42 + m43 + m44;
+    }
+ }
+
+
+
