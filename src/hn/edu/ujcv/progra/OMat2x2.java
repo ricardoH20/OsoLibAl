@@ -42,19 +42,19 @@ public class OMat2x2 {
     }
     // metodos
 
-    public double transpuesta()
+    public OMat2x2 transpuesta()
     {
         double g =this.m22 + this.m21 + this.m12  +this.m11;
-        return g;
+        return new OMat2x2(m22,m21,m12,m11);
     }
 
     public OMat2x2 inversa()
     {
-        this.determinante();
-        return new OMat2x2((1/this.determinante()) * this.m22,(1/this.determinante()) * -this.m12,
-                (1/this.determinante()) * -this.m21,(1/this.determinante()) * this.m11);
+        return new OMat2x2( (1) / ((m11 * m22) - (m21 * m12)) * m22, (1) / ((m11 * m22) - (m21 * m12)) * -m12,
+                (1) / ((m11 * m22) - (m21 * m12)) * -m21, (1) / ((m11 * m22) - (m21 * m12)) * m11);
+
     }
-    public double suma(OMat2x2 b){
+    public OMat2x2 suma(OMat2x2 b){
         double r11, r12;
         double r21, r22;
 
@@ -63,12 +63,11 @@ public class OMat2x2 {
         r21 = this.m21 + b.m21;
         r22 = this.m22 + b.m22;
 
-        double g = r11 + r12 + r21 + r22;
 
-        return g;
+        return new OMat2x2(m11,m12,m21,m22);
     }
 
-    public double resta(OMat2x2 b){
+    public OMat2x2 resta(OMat2x2 b){
         double n11, n12;
 
         double n21, n22;
@@ -78,13 +77,12 @@ public class OMat2x2 {
         n21 = this.m21 - b.m21;
         n22 = this.m22 - b.m22;
 
-        double f = n11 + n12 + n21 + n22;
+        return new  OMat2x2(n11,n12,n21,n22);
 
-        return f;
 
     }
 
-    public double mult(OMat2x2 b){
+    public OMat2x2 mult(OMat2x2 b){
         double n11, n12;
 
         double n21, n22;
@@ -96,7 +94,7 @@ public class OMat2x2 {
 
         double p = n11 + n12 + n21 + n22;
         //
-        return  p;
+        return  new OMat2x2(n11,n12,n21,n22);
     }
 
     public double determinante(){
@@ -155,6 +153,12 @@ public class OMat2x2 {
     }
     //public static OMat2x2 rotacion(double alpha)
     //public OMat2x2 inversa(){
+    @Override
+    public String toString()
+    {
+        return "[ "+getM11()+"      "+getM12()+ " ]\n" +
+                "\t\t\t\t\t\t\t[" +getM21()+"      "+getM22()+" ]";
+    }
 
 
 

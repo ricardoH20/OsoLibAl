@@ -108,6 +108,7 @@ public class OMat3x3 {
         OMat2x2 d31 = new OMat2x2(this.m21,this.m31,this.m22,this.m32);
         OMat2x2 d32 = new OMat2x2(this.m11,this.m31,this.m12,this.m32);
         OMat2x2 d33 = new OMat2x2(this.m11,this.m21,this.m12,this.m22);
+
         r11  =  Math.pow(-1,2) * d11.determinante();
         r12  =  Math.pow(-1,3) * d12.determinante();
         r13  =  Math.pow(-1,4) * d13.determinante();
@@ -118,9 +119,7 @@ public class OMat3x3 {
         r32  =  Math.pow(-1,5) * d32.determinante();
         r33  =  Math.pow(-1,6) * d33.determinante();
         return new OMat3x3(r11/det,r12/det,r13/det,
-
                 r21/det,r22/det,r23/det,
-
                 r31/det,r32/det,r33/det);
     }
     public OMat3x3 suma(OMat3x3 b)
@@ -181,15 +180,17 @@ public class OMat3x3 {
 
     public double determinante()
     {
-        double respuesta;
-        respuesta = (this.m11*this.m22*this.m33) +
-                (this.m12*this.m23*this.m31) +
-                (this.m13*this.m21*this.m32) -
-                (this.m31*this.m22*this.m13) -
-                (this.m32*this.m23*this.m11) -
-                (this.m33*this.m21*this.m12);
+        // m11   m12   m13
+        // m21   m22   m23
+        // m31   m32   m33
+        // m11   m12   m13
+        // m21   m22   m23
 
-        return respuesta;
+        // Se aplica Método de Sarrus para obtener determinante de una Matriz 3x3
+
+        double det = ((m11 * m22 * m33) + (m21 * m32 * m13) + (m31 * m12 * m23)) - ((m13 * m22 * m31) + (m23 * m32 * m11) + (m33 * m12 * m21));
+
+        return det;
     }
 
 
@@ -232,11 +233,14 @@ public class OMat3x3 {
         double r11,r13;
         double r31,r33;
         r11 = Math.cos(alpha);
+
         r13 = Math.sin(alpha);
+
         r31 = -Math.sin(alpha);
+
         r33 = Math.cos(alpha);
 
-        return new OMat3x3();
+        return new OMat3x3(r11,0,r13,0,0,0,r31,0,r33);
     }
 
     public static OMat3x3 rotacionZ(double alpha)
@@ -244,9 +248,13 @@ public class OMat3x3 {
         double r11,r12;
         double r21,r22;
         r11 = Math.cos(alpha);
+
         r12 = Math.sin(alpha);
+
         r21 = -Math.sin(alpha);
+
         r22 = Math.cos(alpha);
+
         return new OMat3x3(r11,r12,0,r21,r22,0,0,0,1);
     }
 
@@ -255,6 +263,13 @@ public class OMat3x3 {
                 0, 1, 0,
                 0, 0, 1);
     }
-
+    @Override
+    public String toString()
+    {
+        return "( "+getM11()+"      "+getM12()+"     "+getM13()+" )" +
+                "\n( "+getM21()+"      "+getM22()+"     "+getM23()+ " )" +
+                "\n( "+getM31()+"      "+getM32()+"     "+getM33()+" )";
+    }
 
 }
+

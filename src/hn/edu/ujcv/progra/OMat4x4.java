@@ -140,65 +140,86 @@ public class OMat4x4 {
     }
     // metodos
 
-    public double suma(OMat4x4 b) {
-        double n11, n12, n13;
-        double n21, n22, n23;
-        double n31, n32, n33;
+    public OMat4x4 suma(OMat4x4 b) {
+        double n11, n12, n13, n14;
+        double n21, n22, n23, n24;
+        double n31, n32, n33, n34;
+        double n41, n42, n43 ,n44;
+
 
         n11 = this.m11 + b.m11;
         n12 = this.m12 + b.m12;
         n13 = this.m13 + b.m13;
+        n14 = this.m14 + b.m14;
         n21 = this.m21 + b.m21;
         n22 = this.m22 + b.m22;
         n23 = this.m23 + b.m23;
+        n24 = this.m24 + b.m24;
         n31 = this.m31 + b.m31;
         n32 = this.m32 + b.m32;
         n33 = this.m33 + b.m33;
+        n34 = this.m34 + b.m34;
+        n41 = this.m41 + b.m41;
+        n42 = this.m42 + b.m42;
+        n43 = this.m43 + b.m43;
+        n44 = this.m44 + b.m44;
 
-        double h = n11 + n12 + n13 + n21 + n22 + n23 + n31 + n32 + n33;
 
-        return h;
+
+        return new OMat4x4(n11,n12,n13,n14,n21,n22,n23,n24,n31,n32,n33,n34,n41,n42,n43,n44);
     }
 
-    public double resta(OMat4x4 b) {
-        double n11, n12, n13;
-        double n21, n22, n23;
-        double n31, n32, n33;
+    public OMat4x4 resta(OMat4x4 b) {
+        double n11, n12, n13, n14;
+        double n21, n22, n23, n24;
+        double n31, n32, n33, n34;
+        double n41, n42, n43 ,n44;
 
         n11 = this.m11 - b.m11;
         n12 = this.m12 - b.m12;
         n13 = this.m13 - b.m13;
+        n14 = this.m14 - b.m14;
         n21 = this.m21 - b.m21;
         n22 = this.m22 - b.m22;
         n23 = this.m23 - b.m23;
+        n24 = this.m24 - b.m24;
         n31 = this.m31 - b.m31;
         n32 = this.m32 - b.m32;
         n33 = this.m33 - b.m33;
+        n34 = this.m34 - b.m34;
+        n41 = this.m41 + b.m41;
+        n42 = this.m42 + b.m42;
+        n43 = this.m43 + b.m43;
+        n44 = this.m44 + b.m44;
 
-        double g = n11 - n12 - n13 - n21 - n22 - n23 - n31 - n32 - n33;
 
-        return g;
+        return new OMat4x4(n11,n12,n13,n14,n21,n22,n23,n24,n31,n32,n33,n34,n41,n42,n43,n44);
     }
 
-    public double multiplicacion(OMat4x4 b) {
-        double n11, n12, n13;
-        double n21, n22, n23;
-        double n31, n32, n33;
+    public OMat4x4 multiplicacion(OMat4x4 b) {
+        double r11, r12, r13, r14;
+        double r21, r22, r23, r24;
+        double r31, r32, r33, r34;
+        double r41, r42, r43, r44;
 
-        n11 = (this.m11 * b.m11) + (this.m12 * b.m21);
-        n12 = (this.m11 * b.m12) + (this.m12 * b.m22);
-        n13 = (this.m11 * b.m13) + (this.m13 * b.m23);
-        n21 = (this.m21 * b.m11) + (this.m22 * b.m21);
-        n22 = (this.m21 * b.m12) + (this.m22 * b.m22);
-        n23 = (this.m21 * b.m23) + (this.m23 * b.m23);
-        n31 = (this.m31 * b.m31) + (this.m13 * b.m31);
-        n32 = (this.m31 * b.m32) + (this.m32 * b.m32);
-        n33 = (this.m31 * b.m33) + (this.m33 * b.m32);
+        r11   =  (this.m11 * b.m11) + (this.m12 * b.m21) + (this.m13 * b.m31) + (this.m14 * b.m41);
+        r12   =  (this.m11 * b.m12) + (this.m12 * b.m22) + (this.m13 * b.m32) + (this.m14 * b.m42);
+        r13   =  (this.m11 * b.m13) + (this.m12 * b.m23) + (this.m13 * b.m33) + (this.m14 * b.m43);
+        r14   =  (this.m11 * b.m14) + (this.m12 * b.m24) + (this.m13 * b.m34) + (this.m14 * b.m44);
+        r21   =  (this.m21 * b.m11) + (this.m22 * b.m21) + (this.m23 * b.m31) + (this.m24 * b.m41);
+        r22   =  (this.m21 * b.m12) + (this.m22 * b.m22) + (this.m23 * b.m32) + (this.m24 * b.m42);
+        r23   =  (this.m21 * b.m13) + (this.m22 * b.m23) + (this.m23 * b.m33) + (this.m24 * b.m43);
+        r24   =  (this.m21 * b.m14) + (this.m22 * b.m24) + (this.m23 * b.m34) + (this.m24 * b.m44);
+        r31   =  (this.m31 * b.m11) + (this.m32 * b.m21) + (this.m33 * b.m31) + (this.m34 * b.m41);
+        r32   =  (this.m31 * b.m12) + (this.m32 * b.m22) + (this.m33 * b.m32) + (this.m34 * b.m42);
+        r33   =  (this.m31 * b.m13) + (this.m32 * b.m23) + (this.m33 * b.m33) + (this.m34 * b.m43);
+        r34   =  (this.m31 * b.m14) + (this.m32 * b.m24) + (this.m33 * b.m34) + (this.m34 * b.m44);
+        r41   =  (this.m41 * b.m11) + (this.m42 * b.m21) + (this.m43 * b.m31) + (this.m44 * b.m41);
+        r42   =  (this.m41 * b.m12) + (this.m42 * b.m22) + (this.m43 * b.m32) + (this.m44 * b.m42);
+        r43   =  (this.m41 * b.m13) + (this.m42 * b.m23) + (this.m43 * b.m33) + (this.m44 * b.m43);
+        r44   =  (this.m41 * b.m14) + (this.m42 * b.m24) + (this.m43 * b.m34) + (this.m44 * b.m44);
 
-
-        double p = n11 + n12 + n13 + n21 + n22 + n23 + n31 + n32 + n33;
-        //
-        return p;
+        return new OMat4x4(r11,r12,r13,r14,r21,r22,r23,r24, r31,r32,r33,r34, r41,r42,r43,r44);
     }
 
     public double determinante()
